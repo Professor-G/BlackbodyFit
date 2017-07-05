@@ -8,6 +8,8 @@ This algorithm fits a blackbody curve to a given dataset. If the data contains i
 
 If input data is already in intensity, use the function **blackbody_fit**. This function is not limited to the wavelength range as **blackbody_flux_fit** is. 
 
+Note that the algorithm scales the theoretial Planck curve by a scale ratio, defined by the integral of the data points divided by the integral of the theoretical planck curve. This scales the theoretical curve accordingly to allow for proper fitting. 
+
 # Installation
 
 Clone the repository or download to a local system as a ZIP file.
