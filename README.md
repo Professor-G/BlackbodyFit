@@ -1,5 +1,5 @@
 # BlackbodyFit
-![alt text](Figure_1.png)
+![alt text](figure_1.png)
 # Curve Fitting
 
 This algorithm fits a blackbody curve to a given dataset. If the data contains instrumental flux, the function **blackbody_flux_fit** will cross-reference wavelength and corresponding intensity for the given spectral class of the source. If the spectral class is unknown, intensity data for an F0 star is selected. If no data is available for the specific spectral class selected, the algorithm will pick the closest spectral class available. As of now, the algorithm can only take in wavelength measurements ranging from 351.0 nm to 742.72 nm. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984). See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
