@@ -17,7 +17,20 @@ from scipy.optimize import leastsq
 #wavelength must be in nm
 
 def blackbody_flux_fit(wavelength, flux, spect_class = None):
+    """This function converts instrumental flux measurements to intensity
+    by assigning a correction factor by cross referncing wavelength and
+    intensity for known stars. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984).
+    See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
     
+    After converting flux to intensity, the function fits a black body curve
+    using the least squares method. 
+    
+    :param wavelength: Wavelength measurements. MUST BE IN NANOMETERS!
+    :param flux: Instrumental flux from your measurement.
+    :param spect_Class: Spectral class. Must be a string. Ex) 'A5'
+    
+    :rtype: Plot of data with fit, along with predicted temperature. 
+    """
     if spect_class == None:
         spect_class == 'F0'
     
@@ -84,7 +97,7 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
         scale_factor = flux_integral / planck_integral
         return scale_factor*blackbody_intensity
         
-    t0 = np.array([5000])
+    t0 = np.array([3000])
 
     def residuals(T, y, lam):
         return y - blackbody_intensity(wavelength, intensity, T)
@@ -105,7 +118,7 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     plt.plot(wavelength, intensity, 'yo', label = "DATA")
     plt.plot(wavelength, y, 'r-', linewidth =3, label = "FIT")
     plt.title("Planck Curve With Predicted Fit")
-    plt.xlabel("$\lambda$")
+    plt.xlabel("$\lambda$ (m)")
     plt.ylabel("Intensity")
     ax.text(0.65, 0.01, "T (K): %s" % T,
         verticalalignment='bottom', horizontalalignment='right',
@@ -117,7 +130,14 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     return "The best fit temperature in Kelvins is:", T
     
 def blackbody_fit(wavelength, intensity):
-    #wavelength must be in nm
+    """This function fits a black body curve to the input data using
+    the least squares method. 
+    
+    :param wavelength: Wavelength measurements. MUST BE IN NANOMETERS!
+    :param intensity: Intensity measurements.
+    
+    :rtype: Plot of data with fit, along with predicted temperature. 
+    """
     wavelength = wavelength*1e-9 #convert to meters for SI consistency
 
 
@@ -128,7 +148,7 @@ def blackbody_fit(wavelength, intensity):
         scale_factor = flux_integral / planck_integral
         return scale_factor*blackbody_intensity
         
-    t0 = np.array([5000])
+    t0 = np.array([3000])
 
     def residuals(T, y, lam):
         return y - blackbody_intensity(wavelength, intensity, T)
@@ -149,7 +169,7 @@ def blackbody_fit(wavelength, intensity):
     plt.plot(wavelength, intensity, 'yo', label = "DATA")
     plt.plot(wavelength, y, 'r-', linewidth =3, label = "FIT")
     plt.title("Planck Curve With Predicted Fit")
-    plt.xlabel("$\lambda$")
+    plt.xlabel("$\lambda$ (m)")
     plt.ylabel("Intensity")
     ax.text(0.65, 0.01, "T (K): %s" % T,
         verticalalignment='bottom', horizontalalignment='right',
