@@ -8,7 +8,15 @@ Created on Mon Jul  3 21:31:30 2017
 import numpy as np
 
 def select_data(spect_class):
+    """This function selects the intensity data used to calibrate and
+    convert the instrumental flux to intensity. If there's no data for the
+    specific spectral class, the function picks the closest spectral class
+    to the input one.
     
+    :param spect_class: Spectral class. Must be a string. Ex) 'A5'
+
+    :rtype: array
+    """
     intensity_data = np.loadtxt('all_spectra.txt')
     
     if spect_class == 'O' or spect_class == 'O5' or spect_class == 'O4' or spect_class == 'O3' or spect_class == 'O2' or spect_class == 'O1':
