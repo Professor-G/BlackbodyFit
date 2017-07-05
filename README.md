@@ -42,4 +42,8 @@ You can run any of these test scripts by typing, for example, *python test_scrip
 
 Want to contribute? Bug detections? Comments? Please email me : dg7541@bard.edu
 
+# Acknowledgements
+
+The author would like to thank the CUREA program at Mt. Wilson for the motivation and guidance necessary for the development of this program. Please see: http://physics.kenyon.edu/people/turner/cureaweb/CUREA.htm
+
 
