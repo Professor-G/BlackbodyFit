@@ -30,7 +30,7 @@ These three packages are bundled with anaconda. If you have anaconda installed a
 
 # Test Scripts
 
-To make sure that the algorithm is working, you can run the three test scripts available in the **test** folder. 
+To make sure that the algorithm is working, you can run the four test scripts available in the **test** folder. 
 
 * **test_script1**: Fits data for F4 star HD  23511.
 * **test_script2**: Fits data for O7 star HD 35619
