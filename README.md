@@ -1,5 +1,5 @@
 # BlackbodyFit
-![alt text](http://imgur.com/TZgZym0 )
+!['o' output](http://imgur.com/TZgZym0 )
 
 # Curve Fitting
 
