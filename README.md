@@ -2,7 +2,7 @@
 ![alt text](figure_1.png)
 # Curve Fitting
 
-This algorithm fits a blackbody curve to a given dataset. If the data contains instrumental flux, the function **blackbody_flux_fit** will cross-reference wavelength and corresponding intensity for the given spectral class of the source. If the spectral class is unknown, intensity data for an F0 star is selected. If no data is available for the specific spectral class selected, the algorithm will pick the closest spectral class available. As of now, the algorithm can only take in wavelength measurements ranging from 351.0 nm to 742.72 nm. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984). See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
+This is an open source algorithm that fits a blackbody curve to a given dataset to predict the temperature of the source. If the data contains instrumental flux, the function **blackbody_flux_fit** will cross-reference wavelength and corresponding intensity for the given spectral class of the source. If the spectral class is unknown, intensity data for an F0 star is selected. If no data is available for the specific spectral class selected, the algorithm will pick the closest spectral class available. As of now, the algorithm can only take in wavelength measurements ranging from 351.0 nm to 742.72 nm. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984). See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
 
 **_IMPORTANT_:** The algorithm performs best when the correct spectral class is selected, as it yields a more accurate correction factor to convert the instrumental flux to intensity. 
 
@@ -30,7 +30,7 @@ These three packages are bundled with anaconda. If you have anaconda installed a
 
 # Test Scripts
 
-To make sure that the algorithm is working, you can run the three test scripts available in the **test** folder. 
+To make sure that the algorithm is working, you can run the four test scripts available in the **test** folder. 
 
 * **test_script1**: Fits data for F4 star HD  23511.
 * **test_script2**: Fits data for O7 star HD 35619
