@@ -18,7 +18,7 @@ from scipy.optimize import leastsq
 
 def blackbody_flux_fit(wavelength, flux, spect_class = None):
     """This function converts instrumental flux measurements to intensity
-    by assigning a correction factor by cross referncing wavelength and
+    by assigning a correction factor by cross referencing wavelength and
     intensity for known stars. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984).
     See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
     
