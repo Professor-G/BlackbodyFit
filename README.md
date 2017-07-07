@@ -34,8 +34,8 @@ To make sure that the algorithm is working, you can run the four test scripts av
 
 * **test_script1**: Fits data for F4 star HD  23511.
 * **test_script2**: Fits data for O7 star HD 35619
-* **test_script3** Fits data for A0 star, Vega. Data contains instrumental flux as measured by the 16-inch telescope at Mt. Wilson. This function makes use of the **blackbody_flux_fit** function. 
-* **test_script4** Fits data for Be star GSC 3984:1357. Data contains instrumental flux as measured by the 16-inch telescope at Mt. Wilson. This function makes use of the **blackbody_flux_fit** function. 
+* **test_script3** Fits data for A0 star, Vega. Data contains instrumental flux as measured by the 16-inch telescope at Mt. Wilson. This script makes use of the **blackbody_flux_fit** function. 
+* **test_script4** Fits data for Be star GSC 3984:1357. Data contains instrumental flux as measured by the 16-inch telescope at Mt. Wilson. This script makes use of the **blackbody_flux_fit** function. 
 
 You can run any of these test scripts by typing, for example, *python test_script1.py* in a terminal.
 
