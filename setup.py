@@ -6,7 +6,7 @@ setup(
     version="0.1",
     description="Curve fitting planck curve",
     author="Daniel Godines Alcantara",
-    author_email="dg7541@bard.edu",
+    author_email="danielgodinez123@gmail.edu",
     url="https://github.com/dg7541/BlackbodyFit",
     packages=find_packages('.'),
 )
