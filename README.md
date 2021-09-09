@@ -26,8 +26,6 @@ This code utilizes three common python packages:
 * scipy
 * matplotlib
 
-These three packages are bundled with anaconda. If you have anaconda installed all these packages are installed in your machine already.
-
 # Test Scripts
 
 To make sure that the algorithm is working, you can run the four test scripts available in the **test** folder. 
@@ -41,7 +39,7 @@ You can run any of these test scripts by typing, for example, *python test_scrip
 
 # How to Contribute?
 
-Want to contribute? Bug detections? Comments? Please email me : dg7541@bard.edu
+Want to contribute? Bug detections? Comments? Please email me : danielgodinez123@gmail.com
 
 # Acknowledgements
 
