@@ -1,5 +1,6 @@
 # BlackbodyFit
-![alt text](figure.png)
+<img src="https://user-images.githubusercontent.com/19847448/135402464-0e8ada6a-db1a-4e8c-8608-2d88bb1b633d.png">
+
 # Curve Fitting
 
 This is an open source algorithm that fits a blackbody curve to a given dataset to predict the temperature of the source. If the data contains instrumental flux, the function **blackbody_flux_fit** will cross-reference wavelength and corresponding intensity for the given spectral class of the source. If the spectral class is unknown, intensity data for an F0 star is selected. If no data is available for the specific spectral class selected, the algorithm will pick the closest spectral class available. As of now, the algorithm can only take in wavelength measurements ranging from 351.0 nm to 742.72 nm. Intensity measurements are from SPECLIB (JACOBY, HUNTER, AND CHRISTIAN 1984). See: http://adsabs.harvard.edu/abs/1984ApJS...56..257J
@@ -27,7 +28,7 @@ blackbody_fit(wavelength, intensity)
 ```
 <img src="https://user-images.githubusercontent.com/19847448/135399228-415d72c3-f7ba-4b88-a692-897bb1415674.png">
 
-If instead you wish to fit data you collected, you can do so by calling the *blackbody_flux_fit* function and entering your flux measurements, and if known, the stellar spectral class.
+If instead you wish to fit data you collected, you can do so by calling the **blackbody_flux_fit** function and entering your flux measurements, and if known, the stellar spectral class.
 
 ```python
 from blackbody_curve import blackbody_flux_fit
