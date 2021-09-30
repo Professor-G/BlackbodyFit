@@ -8,7 +8,24 @@ This is an open source algorithm that fits a blackbody curve to a given dataset 
 
 If input data is already in intensity, use the function **blackbody_fit**. This function is not limited to the wavelength range as **blackbody_flux_fit** is. 
 
-Note that the algorithm scales the theoretial Planck curve by a scale ratio, defined by the integral of the data points divided by the integral of the theoretical planck curve. This scales the theoretical curve accordingly to allow for proper fitting. 
+Note that the algorithm scales the theoretial Planck curve by a scale ratio, defined by the integral of the data points divided by the integral of the theoretical planck curve. This scales the theoretical curve accordingly so that it can be plotted with the same scale as your data. 
+
+# Example
+
+An astrophysical source is measured to have magnitude 12 in the L photometric band (centered at 3.5&mu;), and 20 in the H band (centered at 1.65&mu;). Assume that the source is emitting like a blackbody, plot the blackbody curve that best fits the data. What is the temperature of the source?
+
+```python
+import numpy as np
+from blackbody_curve import blackbody_fit
+
+wavelength = np.array([3500, 1650]) #convert to nanometers
+magnitudes = np.array([12, 20])
+
+intensity = 10**(magnitudes/2.5) #convert magnitudes to intensity
+
+blackbody_fit(wavelength, intensity)
+```
+<img src="https://user-images.githubusercontent.com/19847448/135399228-415d72c3-f7ba-4b88-a692-897bb1415674.png">
 
 # Installation
 
