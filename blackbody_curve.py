@@ -17,7 +17,7 @@ from scipy.optimize import leastsq
 def blackbody(wavelength, T):
     """
     Planck's law, which describes the black body radiation 
-    of a source in thermal equilibrum at a given temperature T.
+    of a source in thermal equilibrium at a given temperature T.
     """
         return 2*h*c**2 / (wavelength**5 * (np.e**(h*c / (wavelength*k*T)) - 1))
         
