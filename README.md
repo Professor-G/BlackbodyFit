@@ -27,6 +27,13 @@ blackbody_fit(wavelength, intensity)
 ```
 <img src="https://user-images.githubusercontent.com/19847448/135399228-415d72c3-f7ba-4b88-a692-897bb1415674.png">
 
+If instead you wish to fit data you collected, you can do so by calling the *blackbody_flux_fit* function and entering your flux measurements, and if known, the stellar spectral class.
+
+```python
+from blackbody_curve import blackbody_flux_fit
+
+blackbody_flux_fit(wavelength, flux, spect_class = 'G7')
+```
 # Installation
 
 Clone the repository or download to a local system as a ZIP file.
