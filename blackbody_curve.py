@@ -14,8 +14,9 @@ from scipy.integrate import quad
 from scipy.optimize import leastsq
 
 
-#wavelength must be in nm
-
+def blackbody(wavelength, T):
+        return 2*h*c**2 / (wavelength**5 * (np.e**(h*c / (wavelength*k*T)) - 1))
+        
 def blackbody_flux_fit(wavelength, flux, spect_class = None):
     """This function converts instrumental flux measurements to intensity
     by assigning a correction factor by cross referencing wavelength and
@@ -26,7 +27,7 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     using the least squares method. 
     
     :param wavelength: Wavelength measurements. MUST BE IN NANOMETERS!
-    :param flux: Instrumental flux from your measurement.
+    :param flux: Instrumental flux from your instrument.
     :param spect_Class: Spectral class. Must be a string. Ex) 'A5'
     
     :rtype: Plot of data with fit, along with predicted temperature. 
@@ -36,7 +37,6 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     
     wave = np.array(wavelength)
     flux = np.array(flux)
-
 
     wave_data = np.loadtxt('all_spectra.txt')
     wave_check = wave_data[:,0]
@@ -48,7 +48,6 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     #check where wave matches closest to wave_check, and that index is applied
     #to spect_data to give the corresponding intensity. Interpolation between the
     #two closest intensity values is applied for increased accuracy
-
 
     intensity_list = []
 
@@ -82,36 +81,31 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
         intensity = f(x_new)
         intensity_list.append(intensity)
 
-    
     correction = intensity_list/flux
     intensity = [q*w for q,w in zip(flux, correction)]
     
     wavelength = wave*1e-10 #convert to meters for SI consistency
 
     def blackbody_intensity(wave, intensity, T):
-        
-        blackbody_intensity = 2*h*c**2 / (wave**5 * (np.e**(h*c / (wave*k*T)) - 1))
+        blackbody_intensity = blackbody(wave, T)
+
         flux_integral = np.abs(np.trapz(intensity, wave))
         planck_integral = np.abs(quad(blackbody, np.min(wave), np.max(wave), args = T ))[0]
-        
         scale_factor = flux_integral / planck_integral
+
         return scale_factor*blackbody_intensity
-        
-    t0 = np.array([3000])
 
     def residuals(T, y, lam):
         return y - blackbody_intensity(wavelength, intensity, T)
     
-    T = leastsq(residuals, t0, args = (intensity, wavelength))[0]        
+    t0 = np.array([3000]) #the initial temperature guess for the optimization
+    T = leastsq(residuals, t0, args = (intensity, wavelength))[0].astype('float32')        
     bbody_fit = blackbody(wavelength, T)
     
     intsrumental_integral = np.abs(np.trapz(intensity, wavelength))
-    planck_integral = np.abs(quad(blackbody, np.min(wavelength), np.max(wavelength), args = T ))[0]
-
+    planck_integral = np.abs(quad(blackbody, np.min(wavelength), np.max(wavelength), args = T))[0]
     scale_factor = intsrumental_integral / planck_integral
-
     y = scale_factor*bbody_fit
-    T = np.float(T)
     
     fig = plt.figure()
     ax = fig.add_subplot(111)    
@@ -120,14 +114,15 @@ def blackbody_flux_fit(wavelength, flux, spect_class = None):
     plt.title("Planck Curve With Predicted Fit")
     plt.xlabel("$\lambda$ (m)")
     plt.ylabel("Intensity")
-    ax.text(0.65, 0.01, "T (K): %s" % T,
+    ax.text(0.65, 0.01, "T (K): %s" % T[0],
         verticalalignment='bottom', horizontalalignment='right',
         transform=ax.transAxes,
         color='black', fontsize=20)
     plt.legend(loc = 1)
     plt.show()
     
-    return "The best fit temperature in Kelvins is:", T
+    print("The best fit temperature in Kelvins is: " +str(T[0]))
+
     
 def blackbody_fit(wavelength, intensity):
     """This function fits a black body curve to the input data using
@@ -139,30 +134,27 @@ def blackbody_fit(wavelength, intensity):
     :rtype: Plot of data with fit, along with predicted temperature. 
     """
     wavelength = wavelength*1e-9 #convert to meters for SI consistency
-
-
+  
     def blackbody_intensity(wave, intensity, T):
-        blackbody_intensity = 2*h*c**2 / (wave**5 * (np.e**(h*c / (wave*k*T)) - 1))
+        blackbody_intensity = blackbody(wave, T)
+
         flux_integral = np.abs(np.trapz(intensity, wave))
         planck_integral = np.abs(quad(blackbody, np.min(wave), np.max(wave), args = T ))[0]
         scale_factor = flux_integral / planck_integral
+
         return scale_factor*blackbody_intensity
         
-    t0 = np.array([3000])
-
     def residuals(T, y, lam):
         return y - blackbody_intensity(wavelength, intensity, T)
-    
-    T = leastsq(residuals, t0, args = (intensity, wavelength))[0]        
+
+    t0 = np.array([3000]) #the initial temperature guess for the optimization
+    T = leastsq(residuals, t0, args = (intensity, wavelength))[0].astype('float32')        
     bbody_fit = blackbody(wavelength, T)
     
     intsrumental_integral = np.abs(np.trapz(intensity, wavelength))
-    planck_integral = np.abs(quad(blackbody, np.min(wavelength), np.max(wavelength), args = T ))[0]
-
+    planck_integral = np.abs(quad(blackbody, np.min(wavelength), np.max(wavelength), args = T))[0]
     scale_factor = intsrumental_integral / planck_integral
-
     y = scale_factor*bbody_fit
-    T = np.float(T)
       
     fig = plt.figure()
     ax = fig.add_subplot(111)    
@@ -171,16 +163,13 @@ def blackbody_fit(wavelength, intensity):
     plt.title("Planck Curve With Predicted Fit")
     plt.xlabel("$\lambda$ (m)")
     plt.ylabel("Intensity")
-    ax.text(0.65, 0.01, "T (K): %s" % T,
+    ax.text(0.65, 0.01, "T (K): %s" % T[0],
         verticalalignment='bottom', horizontalalignment='right',
         transform=ax.transAxes,
         color='black', fontsize=20)
     plt.legend(loc = 1)
     plt.show()
     
-    return "The best fit temperature in Kelvins is:", T
-        
-def blackbody(lam, T):
-        return 2*h*c**2 / (lam**5 * (np.e**(h*c / (lam*k*T)) - 1))
+    print("The best fit temperature in Kelvins is: " +str(T[0]))
         
 
